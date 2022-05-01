@@ -1,6 +1,8 @@
 import sqlite3
 
 # Создание Базы
+import time
+
 db = sqlite3.connect('repices.db')
 sql = db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS repices (
@@ -43,8 +45,12 @@ def LiteFood():
     manag = int(input())
     if manag == 1:
         AddRep()
-    else:
+    elif manag == 2:
         AllRep()
+    else:
+        print('Введено неверное значение, повторите!')
+        time.sleep(5)
+        LiteFood()
 
 
 
