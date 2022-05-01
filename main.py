@@ -42,17 +42,20 @@ def AllRep():
 
 def LiteFood():
     print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты')
-    manag = int(input())
-    if manag == 1:
-        AddRep()
-    elif manag == 2:
-        AllRep()
-    else:
-        print('Введено неверное значение, повторите!')
-        time.sleep(5)
+    try:
+        manag = int(input())
+        if manag == 1:
+            AddRep()
+        elif manag == 2:
+            AllRep()
+        else:
+            print('Введено неверное значение, повторите!')
+            time.sleep(2)
+            LiteFood()
+    except ValueError:
+        print('Введеное значение не явзяеться числом, повторите попытку!')
+        time.sleep(2)
         LiteFood()
-
-
 
 # Запуск
 LiteFood()
