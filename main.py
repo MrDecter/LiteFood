@@ -39,7 +39,6 @@ def AllRep():
         print(i)
 
 
-
 def LiteFood():
     print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты')
     try:
