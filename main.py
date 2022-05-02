@@ -35,12 +35,29 @@ def AddRep():
             print(value)
 
 def AllRep():
-    for i in sql.execute("SELECT * FROM repices"):
-        print(i)
+    testing = sql.execute("SELECT * FROM repices")
+    allfetch = testing.fetchall()
+    print(allfetch[4][0])
+    q = 0
+    while q != len(allfetch):
+        i = 0
+        print(str(q + 1) + '.Рецепт')
+        while i < 3:
+            if i == 0:
+                print('Название: \n' + allfetch[q][i])
+                i = i + 1
+            elif i == 1:
+                print('Продукты: \n' + allfetch[q][i])
+                i = i + 1
+            else:
+                print('Рецепт: \n' + allfetch[q][i] + '\n')
+                i = i + 1
+        q = q + 1
 
 
 def LiteFood():
     print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты')
+    # Проверка типа данных
     try:
         manag = int(input())
         if manag == 1:
