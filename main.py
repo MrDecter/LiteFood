@@ -7,6 +7,7 @@ db = sqlite3.connect('repices.db')
 sql = db.cursor()
 sql.execute("""CREATE TABLE IF NOT EXISTS repices (
     name_rep TEXT,
+    product TEXT,
     discript_rep TEXT,
     all_rep TEXT
     )""")
@@ -21,12 +22,25 @@ def AddRep():
     name = input('Название рецепта:\n').lower()
     discript = input('Описание рецепта:\n').lower()
     main_rep = input('Инструкция рецепта:\n').lower()
+    prod = []
+    z = True
+    while z == True:
+        produc = input('Какие продукты используете?\nP.S.Вводите по одному\n').lower()
+        prod.append(produc)
+        logis = int(input('1. Добавить еще один\n2. Закончить\n'))
+        if logis == 1:
+            z = True
+        else:
+            prod.sort()
+            print('Вы добавили: ' + str(prod))
+            z = False
+            time.sleep(3)
 
     # Проверка имени
     sql.execute(f"SELECT name_rep FROM repices WHERE name_rep = '{name}'")
     if sql.fetchone() is None:
         # Если совпадений нет, добавление
-        sql.execute(f'INSERT INTO repices VALUES(?,?,?)',(name,discript,main_rep))
+        sql.execute(f'INSERT INTO repices VALUES(?,?,?,?)',(name,prod,discript,main_rep))
         db.commit()
         print("Рецепт добавлен!")
     else:
@@ -43,12 +57,15 @@ def AllRep():
     while q != len(allfetch):
         i = 0
         print(str(q + 1) + '.Рецепт')
-        while i < 3:
+        while i < 4:
             if i == 0:
                 print('Название: \n' + allfetch[q][i])
                 i = i + 1
             elif i == 1:
                 print('Продукты: \n' + allfetch[q][i])
+                i = i + 1
+            elif i == 2:
+                print('Описание: \n' + allfetch[q][i])
                 i = i + 1
             else:
                 print('Рецепт: \n' + allfetch[q][i] + '\n')
@@ -71,11 +88,12 @@ def OneRep():
             elif i == 1:
                 print('Продукты: \n' + Grab_all[One][i])
                 i = i + 1
+            elif i == 2:
+                print('Описание: \n' + Grab_all[One][i])
+                i = i + 1
             else:
                 print('Рецепт: \n' + Grab_all[One][i] + '\n')
                 i = i + 1
-
-
     else:
         print('Рецепта с таким номером нет')
         time.sleep(2)
@@ -91,6 +109,7 @@ def OneRep():
         else:
             print('Введеное значение не опознано, вы возвращаеться в главное меню')
             time.sleep(2)
+
 
 # Функция:Выбора функции
 def LiteFood():
