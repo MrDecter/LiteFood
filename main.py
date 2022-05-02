@@ -14,6 +14,7 @@ db.commit()
 
 # Функции
 
+# Функция:Добавление рецепта
 def AddRep():
     # Получение значений
     # Все переведено в нижний регист, для избежание дублей в таблице
@@ -34,6 +35,7 @@ def AddRep():
         for value in db.execute('SELECT * FROM repices'):
             print(value)
 
+# Функция:Показать все рецепты
 def AllRep():
     testing = sql.execute("SELECT * FROM repices")
     allfetch = testing.fetchall()
@@ -53,6 +55,7 @@ def AllRep():
                 i = i + 1
         q = q + 1
 
+# Функция:Показать рецепт по числу
 def OneRep():
     Grab = sql.execute("SELECT * FROM repices")
     Grab_all = Grab.fetchall()
@@ -88,6 +91,8 @@ def OneRep():
         else:
             print('Введеное значение не опознано, вы возвращаеться в главное меню')
             time.sleep(2)
+
+# Функция:Выбора функции
 def LiteFood():
     print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты \n 3. Посмотреть рецепт по номеру')
     # Проверка типа данных
