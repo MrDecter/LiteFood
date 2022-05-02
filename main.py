@@ -37,7 +37,6 @@ def AddRep():
 def AllRep():
     testing = sql.execute("SELECT * FROM repices")
     allfetch = testing.fetchall()
-    print(allfetch[4][0])
     q = 0
     while q != len(allfetch):
         i = 0
@@ -54,9 +53,43 @@ def AllRep():
                 i = i + 1
         q = q + 1
 
+def OneRep():
+    Grab = sql.execute("SELECT * FROM repices")
+    Grab_all = Grab.fetchall()
+    One = int(input('Рецепт под каким номером будем искать? \n'))
+    One = One - 1
+    if One < len(Grab_all):
+        print('Поиск рецепта под номером: ' + str(One + 1))
+        i = 0
+        while i < 3:
+            if i == 0:
+                print('Название: \n' + Grab_all[One][i])
+                i = i + 1
+            elif i == 1:
+                print('Продукты: \n' + Grab_all[One][i])
+                i = i + 1
+            else:
+                print('Рецепт: \n' + Grab_all[One][i] + '\n')
+                i = i + 1
 
+
+    else:
+        print('Рецепта с таким номером нет')
+        time.sleep(2)
+        menus = input('1. Вернуться \n 2. Повторить \n')
+        if menus == 1:
+            print('Возврат в начальное меню...')
+            time.sleep(2)
+            LiteFood()
+        elif menus == 2:
+            print('Возврат в начало поиска...')
+            time.sleep(2)
+            OneRep()
+        else:
+            print('Введеное значение не опознано, вы возвращаеться в главное меню')
+            time.sleep(2)
 def LiteFood():
-    print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты')
+    print('Добро пожаловать в LiteFood! \n 1. Добавить рецепт \n 2. Посмотреть рецепты \n 3. Посмотреть рецепт по номеру')
     # Проверка типа данных
     try:
         manag = int(input())
@@ -64,6 +97,8 @@ def LiteFood():
             AddRep()
         elif manag == 2:
             AllRep()
+        elif manag == 3:
+            OneRep()
         else:
             print('Введено неверное значение, повторите!')
             time.sleep(2)
